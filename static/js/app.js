@@ -481,7 +481,7 @@ function renderProductGridHtml(productsList) {
 }
 
 window.filterByGame = function(game) {
-    window.location.hash = game === 'All games' ? '#/' : `#[/]?game=${encodeURIComponent(game)}`;
+       window.location.hash = game === 'All games' ? '#/' : `#/?game=${encodeURIComponent(game)}`;
 };
 
 window.handleSearch = async function(event) {
