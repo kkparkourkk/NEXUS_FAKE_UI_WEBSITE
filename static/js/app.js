@@ -481,7 +481,7 @@ function renderProductGridHtml(productsList) {
 }
 
 window.filterByGame = function(game) {
-       window.location.hash = game === 'All games' ? '#/' : `#/?game=${encodeURIComponent(game)}`;
+    window.location.hash = game === 'All games' ? '#/' : `#/?game=${encodeURIComponent(game)}`;
 };
 
 window.handleSearch = async function(event) {
@@ -1043,97 +1043,65 @@ async function renderPaymentPage(container, orderId) {
 
     container.innerHTML = `
         <div class="container" style="max-width: 500px; padding: 40px 0;">
-            <!-- Razorpay Checkout Container -->
+            <!-- Demo Checkout Container -->
             <div style="background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.6); color: #2b3951; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; border: 1px solid rgba(255,255,255,0.05);">
-                
-                <!-- Razorpay Header -->
+
+                <!-- Demo Banner -->
+                <div style="background: #fff3cd; color: #856404; padding: 10px 16px; text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.03em;">
+                    ⚠ DEMO MODE — No real payment is processed. College project only.
+                </div>
+
+                <!-- Header -->
                 <div style="background: #0d1e3d; color: #ffffff; padding: 22px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
                     <div>
-                        <h3 style="font-size: 16px; font-weight: 800; color: #7f99be; text-transform: uppercase; letter-spacing: 0.05em; margin: 0; font-family: var(--font-heading);">NEXUS //</h3>
+                        <h3 style="font-size: 16px; font-weight: 800; color: #7f99be; text-transform: uppercase; letter-spacing: 0.05em; margin: 0; font-family: var(--font-heading);">NEXUS // (Demo)</h3>
                         <span style="font-size: 12px; color: #a5b8d1; font-family: monospace;">Order: ${order.id}</span>
                     </div>
                     <div style="text-align: right;">
-                        <span style="font-size: 10px; color: #7f99be; display: block; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">Amount to Pay</span>
+                        <span style="font-size: 10px; color: #7f99be; display: block; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">Simulated Amount</span>
                         <span style="font-size: 22px; font-weight: 800; color: #52e3c2;">₹${inrTotal.toLocaleString('en-IN')}</span>
                     </div>
                 </div>
 
-                <!-- Razorpay Checkout Body -->
+                <!-- Body -->
                 <div style="padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 20px; background: #fafbfe;">
-                    
+
                     <!-- Payment Method Indicator -->
                     <div style="display: flex; width: 100%; align-items: center; gap: 10px; background: rgba(51, 149, 255, 0.05); border: 1px solid rgba(51, 149, 255, 0.15); padding: 12px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; color: #1a66ff;">
                         <i data-lucide="qr-code" style="width: 18px; height: 18px;"></i>
-                        <span>UPI QR Code - Scan and Pay</span>
+                        <span>Simulated Payment Step (no real gateway)</span>
                     </div>
 
-                    <!-- QR Code Display (Framed) -->
-                    <div style="background: #ffffff; padding: 16px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; border: 1px solid #e1e6ef; width: 220px; aspect-ratio: 1; justify-content: center;">
-                        <img src="${settings.qr_image_url}" alt="Razorpay QR Code" style="width: 100%; height: 100%; object-fit: contain;">
-                    </div>
-
-                    <!-- Countdown Timer -->
-                    <div style="text-align: center;">
-                        <span style="font-size: 13px; color: #4e5d78; display: block; margin-bottom: 2px;">QR Code expires in</span>
-                        <span id="payment-timer" style="font-size: 18px; font-weight: 700; color: #ff3366; font-family: monospace;">04:59</span>
+                    <!-- Placeholder instead of a real QR code -->
+                    <div style="background: #f1f3f7; padding: 16px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px dashed #c3cad6; width: 220px; aspect-ratio: 1; text-align: center; color: #7f8e9d; font-size: 12px; gap: 8px;">
+                        <i data-lucide="image-off" style="width: 28px; height: 28px;"></i>
+                        <span>Payment gateway integration placeholder</span>
                     </div>
 
                     <div style="border-bottom: 1px solid #e1e6ef; width: 100%; margin: 4px 0;"></div>
 
-                    <!-- Billing / Target Character Info -->
+                    <!-- Order summary only, no sensitive account targeting language -->
                     <div style="width: 100%; font-size: 13px; color: #4e5d78; display: flex; flex-direction: column; gap: 8px;">
                         <div style="display: flex; justify-content: space-between;">
-                            <span>Target Account UID</span>
-                            <strong style="color: #0d1e3d;">${order.player_uid} (${order.game})</strong>
+                            <span>Game</span>
+                            <strong style="color: #0d1e3d;">${order.game}</strong>
                         </div>
                         <div style="display: flex; justify-content: space-between;">
-                            <span>Customer Email</span>
-                            <strong style="color: #0d1e3d;">${order.customer_email}</strong>
+                            <span>Order ID</span>
+                            <strong style="color: #0d1e3d;">${order.id}</strong>
                         </div>
-                    </div>
-
-                    <!-- Razorpay Secure Badge -->
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 8px; color: #7f8e9d; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; width: 100%;">
-                        <i data-lucide="shield-check" style="width: 16px; height: 16px; color: #00b06f; fill: rgba(0, 176, 111, 0.1);"></i>
-                        <span>Secured by Razorpay</span>
                     </div>
 
                     <!-- Action Button -->
                     <button onclick="handleCompletedPayment('${order.id}')" style="width: 100%; padding: 14px; border: none; background: #3395ff; color: #ffffff; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(51, 149, 255, 0.3);">
-                        I've completed payment <i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i>
+                        Simulate payment completion <i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i>
                     </button>
                 </div>
             </div>
         </div>
     `;
 
-    // Start Razorpay Checkout 5-minute countdown timer
-    setTimeout(() => {
-        let minutes = 4;
-        let seconds = 59;
-        const timerInterval = setInterval(() => {
-            const timerEl = document.getElementById('payment-timer');
-            if (!timerEl) {
-                clearInterval(timerInterval);
-                return;
-            }
-            seconds--;
-            if (seconds < 0) {
-                minutes--;
-                seconds = 59;
-            }
-            if (minutes < 0) {
-                clearInterval(timerInterval);
-                timerEl.innerText = "EXPIRED";
-                timerEl.style.color = "#ff4d4d";
-                return;
-            }
-            const minStr = String(minutes).padStart(2, '0');
-            const secStr = String(seconds).padStart(2, '0');
-            timerEl.innerText = `${minStr}:${secStr}`;
-        }, 1000);
-    }, 100);
-
+    lucide.createIcons();
 }
 
 window.handleCompletedPayment = async function(orderId) {
