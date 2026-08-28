@@ -612,7 +612,7 @@ function renderHowItWorks(container) {
                     <div style="width: 60px; height: 60px; border-radius: 12px; background: rgba(255, 46, 147, 0.1); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 24px; color: var(--color-pink); flex-shrink: 0; font-family: var(--font-heading);">3</div>
                     <div>
                         <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">Secure QR Payment</h3>
-                        <p style="color: var(--text-muted); font-size: 14px;">Scan the dynamically generated UPI payment QR code, send the exact INR amount, and click completion. Our admin team verifies payments securely.</p>
+                        <p style="color: var(--text-muted); font-size: 14px;">Scan the UPI payment QR code, send the exact INR amount, and click completion. Our team verifies payments securely.</p>
                     </div>
                 </div>
                 <div class="product-card bg-glass" style="display: flex; gap: 24px; padding: 24px; align-items: center;">
@@ -1050,22 +1050,17 @@ async function renderPaymentPage(container, orderId) {
 
     container.innerHTML = `
         <div class="container" style="max-width: 500px; padding: 40px 0;">
-            <!-- Demo Checkout Container -->
+            <!-- Payment Checkout Container -->
             <div style="background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.6); color: #2b3951; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; border: 1px solid rgba(255,255,255,0.05);">
-
-                <!-- Demo Banner -->
-                <div style="background: #fff3cd; color: #856404; padding: 10px 16px; text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.03em;">
-                    ⚠ DEMO MODE — College project only.
-                </div>
 
                 <!-- Header -->
                 <div style="background: #0d1e3d; color: #ffffff; padding: 22px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
                     <div>
-                        <h3 style="font-size: 16px; font-weight: 800; color: #7f99be; text-transform: uppercase; letter-spacing: 0.05em; margin: 0; font-family: var(--font-heading);">NEXUS // (Demo)</h3>
+                        <h3 style="font-size: 16px; font-weight: 800; color: #7f99be; text-transform: uppercase; letter-spacing: 0.05em; margin: 0; font-family: var(--font-heading);">NEXUS</h3>
                         <span style="font-size: 12px; color: #a5b8d1; font-family: monospace;">Order: ${order.id}</span>
                     </div>
                     <div style="text-align: right;">
-                        <span style="font-size: 10px; color: #7f99be; display: block; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">Simulated Amount</span>
+                        <span style="font-size: 10px; color: #7f99be; display: block; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">Total Amount</span>
                         <span style="font-size: 22px; font-weight: 800; color: #52e3c2;">₹${inrTotal.toLocaleString('en-IN')}</span>
                     </div>
                 </div>
@@ -1084,9 +1079,8 @@ async function renderPaymentPage(container, orderId) {
                         <img src="${dynamicQrUrl}" alt="UPI QR Code" style="width: 100%; height: 100%; object-fit: contain;">
                     </div>
 
-                    <!-- UPI Info instructions -->
+                    <!-- UPI Info instructions (Removed raw UPI ID details text as requested) -->
                     <div style="text-align: center; font-size: 13px; color: #4e5d78; display: flex; flex-direction: column; gap: 4px;">
-                        <span style="font-weight: 700;">UPI ID: ${settings.payment_identifier}</span>
                         <span style="font-size: 12px; color: #7f8e9d;">${settings.instructions}</span>
                     </div>
 
@@ -1106,7 +1100,7 @@ async function renderPaymentPage(container, orderId) {
 
                     <!-- Action Button -->
                     <button onclick="handleCompletedPayment('${order.id}')" style="width: 100%; padding: 14px; border: none; background: #3395ff; color: #ffffff; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(51, 149, 255, 0.3);">
-                        Simulate payment completion <i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i>
+                        I've completed payment <i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i>
                     </button>
                 </div>
             </div>
@@ -1178,7 +1172,7 @@ async function renderTrackingPage(container, orderId) {
                 <i data-lucide="search-code" style="width: 48px; height: 48px; color: #ff4d4d; margin-bottom: 16px;"></i>
                 <h2 style="font-family: var(--font-heading);">Order ID Not Found</h2>
                 <p style="color: var(--text-muted); margin: 12px 0 24px 0;">Please check your reference code and try again.</p>
-                <a href="#/tracking" class="btn btn-secondary">Search again</a>
+                <a href="#/tracking".btn-secondary">Search again</a>
             </div>
         `;
         return;
@@ -1224,7 +1218,7 @@ async function renderTrackingPage(container, orderId) {
         statusClass = "submitted";
     } else if (currentStep === 3) {
         statusText = "Payment Verified";
-        statusDesc = "Your payment of has been successfully verified! Order processing queue is pending.";
+        statusDesc = "Your payment has been successfully verified! Order processing queue is pending.";
         statusIcon = "check-check";
         statusClass = "verified";
     } else if (currentStep === 4) {
