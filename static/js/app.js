@@ -31,6 +31,7 @@ function saveCart() {
     updateCartBadge();
 }
 
+// --- Favorites ---
 function saveFavorites() {
     localStorage.setItem('nexus_favorites', JSON.stringify(state.favorites));
 }
@@ -1041,6 +1042,12 @@ async function renderPaymentPage(container, orderId) {
         instructions: 'Scan QR and pay using UPI.'
     };
 
+    // Construct dynamic UPI payment URI automatically populated with the exact INR total
+    const upiUri = `upi://pay?pa=${encodeURIComponent(settings.payment_identifier)}&pn=NEXUS&am=${inrTotal}&cu=INR`;
+    
+    // Generate dynamic QR Code image using api.qrserver.com
+    const dynamicQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(upiUri)}`;
+
     container.innerHTML = `
         <div class="container" style="max-width: 500px; padding: 40px 0;">
             <!-- Demo Checkout Container -->
@@ -1048,7 +1055,7 @@ async function renderPaymentPage(container, orderId) {
 
                 <!-- Demo Banner -->
                 <div style="background: #fff3cd; color: #856404; padding: 10px 16px; text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.03em;">
-                    ⚠ DEMO MODE — No real payment is processed. College project only.
+                    ⚠ DEMO MODE — College project only.
                 </div>
 
                 <!-- Header -->
@@ -1069,18 +1076,23 @@ async function renderPaymentPage(container, orderId) {
                     <!-- Payment Method Indicator -->
                     <div style="display: flex; width: 100%; align-items: center; gap: 10px; background: rgba(51, 149, 255, 0.05); border: 1px solid rgba(51, 149, 255, 0.15); padding: 12px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; color: #1a66ff;">
                         <i data-lucide="qr-code" style="width: 18px; height: 18px;"></i>
-                        <span>Simulated Payment Step (no real gateway)</span>
+                        <span>Scan UPI QR below to pay</span>
                     </div>
 
-                    <!-- Placeholder instead of a real QR code -->
-                    <div style="background: #f1f3f7; padding: 16px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px dashed #c3cad6; width: 220px; aspect-ratio: 1; text-align: center; color: #7f8e9d; font-size: 12px; gap: 8px;">
-                        <i data-lucide="image-off" style="width: 28px; height: 28px;"></i>
-                        <span>Payment gateway integration placeholder</span>
+                    <!-- Dynamic QR code showing the exact amount -->
+                    <div style="background: #ffffff; padding: 16px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #e1e6ef; width: 220px; aspect-ratio: 1; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                        <img src="${dynamicQrUrl}" alt="UPI QR Code" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+
+                    <!-- UPI Info instructions -->
+                    <div style="text-align: center; font-size: 13px; color: #4e5d78; display: flex; flex-direction: column; gap: 4px;">
+                        <span style="font-weight: 700;">UPI ID: ${settings.payment_identifier}</span>
+                        <span style="font-size: 12px; color: #7f8e9d;">${settings.instructions}</span>
                     </div>
 
                     <div style="border-bottom: 1px solid #e1e6ef; width: 100%; margin: 4px 0;"></div>
 
-                    <!-- Order summary only, no sensitive account targeting language -->
+                    <!-- Order info summary -->
                     <div style="width: 100%; font-size: 13px; color: #4e5d78; display: flex; flex-direction: column; gap: 8px;">
                         <div style="display: flex; justify-content: space-between;">
                             <span>Game</span>
