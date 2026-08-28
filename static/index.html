@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NEXUS // - Premium gaming digital marketplace. Discover rare digital collectibles, level up your inventory, and play with attitude.">
+    <title>NEXUS // Premium Gaming Digital Marketplace</title>
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container header-container">
+            <!-- Left Logo -->
+            <a href="#/" class="logo">
+                <div class="logo-gradient-box">N</div>
+                <span>NEXUS //</span>
+            </a>
+
+            <!-- Navigation Links (Desktop) -->
+            <nav class="nav-links">
+                <a href="#/" class="nav-item active" data-path="/">Marketplace</a>
+                <a href="#/collections" class="nav-item" data-path="/collections">Collections</a>
+                <a href="#/how-it-works" class="nav-item" data-path="/how-it-works">How it Works</a>
+            </nav>
+
+            <!-- Right Actions -->
+            <div class="header-right">
+                <!-- User Profile / Admin Link -->
+                <div id="header-user-area" class="header-user-group">
+                    <a href="#/login" class="btn btn-secondary" id="nav-login-btn">Log in</a>
+                </div>
+
+                <!-- Shopping Cart Icon -->
+                <button class="cart-icon-btn" id="header-cart-btn" aria-label="Shopping Cart">
+                    <i data-lucide="shopping-cart"></i>
+                    <span class="cart-badge" id="cart-badge-count">0</span>
+                </button>
+
+                <!-- Mobile Menu Hamburger -->
+                <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle Navigation">
+                    <i data-lucide="menu" id="hamburger-icon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav" id="mobile-nav-drawer">
+        <a href="#/" class="mobile-nav-item active">Marketplace</a>
+        <a href="#/collections" class="mobile-nav-item">Collections</a>
+        <a href="#/how-it-works" class="mobile-nav-item">How it Works</a>
+        <div class="mobile-auth-area" id="mobile-auth-area" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 16px;">
+            <a href="#/login" class="btn btn-secondary" style="width: 100%;">Log in</a>
+        </div>
+    </div>
+
+    <!-- Main Content target for JS routing -->
+    <main class="main-content" id="app">
+        <!-- Rendered views go here -->
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: var(--bg-darker); border-top: 1px solid var(--border-color); padding: 40px 0; font-size: 14px; color: var(--text-muted); text-align: center; margin-top: 60px;">
+        <div class="container">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px; margin-bottom: 30px; text-align: left;">
+                <div style="max-width: 320px;">
+                    <div class="logo" style="margin-bottom: 16px; color: white;">
+                        <div class="logo-gradient-box" style="width: 24px; height: 24px; font-size: 14px;">N</div>
+                        <span style="font-size: 18px;">NEXUS //</span>
+                    </div>
+                    <p style="line-height: 1.5;">Premium digital marketplace for in-game items, weapon skins, character bundles, and collectibles.</p>
+                </div>
+                <div>
+                    <h4 style="color: white; margin-bottom: 16px; font-family: var(--font-heading); text-transform: uppercase; font-size: 13px; letter-spacing: 0.1em;">Marketplace</h4>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+                        <li><a href="#/?game=Valorant" style="hover: color: white;">Valorant Skins</a></li>
+                        <li><a href="#/?game=CS2" style="hover: color: white;">CS2 Collectibles</a></li>
+                        <li><a href="#/?game=Fortnite" style="hover: color: white;">Fortnite Bundles</a></li>
+                        <li><a href="#/?game=PUBG" style="hover: color: white;">PUBG Sets</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: white; margin-bottom: 16px; font-family: var(--font-heading); text-transform: uppercase; font-size: 13px; letter-spacing: 0.1em;">Legal & Safety</h4>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+                        <li><a href="#/" style="hover: color: white;">Terms of Service</a></li>
+                        <li><a href="#/" style="hover: color: white;">Privacy Policy</a></li>
+                        <li style="color: #ffaa00; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+                            <i data-lucide="shield-check" style="width: 16px; height: 16px;"></i> Secure Platform
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+                <p>&copy; 2026 NEXUS Digital Marketplace. All rights reserved.</p>
+                <p style="color: #ffcc66; font-size: 13px; font-weight: 500;">
+                    NEXUS will never ask for your game password or 2FA authentication codes.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main Client JS Application -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
